@@ -9,7 +9,11 @@ Bien, yo les deje adentro de la funcion ademas del cout que es lo que hace que i
 para que en cada if con la identificacion de provincia guardemos en la misma estructura los datos a almacenar (Ese es un concepto, puede que cambie).
 Por lo que mientras escribo esto se me ocurre hacer 3 veces la leida del archiv para que en una guardemos datos de cordoba, otro de mendoza y asi con el ultimo.
 Cada uno tiene que tener un guardado de datos en la estructura diferente (eligen entre pila, cola o lista).
-Digo que lo hagamos diferente porque vamos a involucrar todo lo visto */
+Digo que lo hagamos diferente porque vamos a involucrar todo lo visto 
+Posdata: 
+Para mi una vez que leamos el archivo y almacenemos de manera ordenada los datos, a partir de ahi ya podemos manejarnos con la estructura city que va a 
+contener todos los datos del archivo .txt [esto por las dudas se lo preguntaria a el/la profe.
+*/
 
 
 using namespace std;
