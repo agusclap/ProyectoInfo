@@ -15,8 +15,10 @@ contener todos los datos del archivo .txt [esto por las dudas se lo preguntaria 
 */
 
 #include <iostream>
-#include <string>
+#include <string.h>
 #include <stdlib.h>
+#include <stdio.h>
+#include <conio.h>
 using namespace std;
 
 struct timestamp {
@@ -112,14 +114,19 @@ int main (void){
 void totalMuestras(struct city **stackptr, struct city){
 	FILE *fp;
 	struct city *temp = NULL;
-	int ident_prov,hora,minutos,dia,mes = 0;
-    int iden_city = 0;
+    struct city *new_node = NULL;
+	int hora,minutos,dia,mes = 0;
+    int iden_city,ident_prov = 0;
 	char nombre[50];
 	float tempe,hum = 0;
 	fp = fopen("data_set.txt","r");
-	cout<<"Total de muestras:"<<endl;         // "
+    if(fp==NULL){
+        cout<<"No se pudo abrir el archivo"<<endl;
+        exit(1);
+    }
+	cout<<"Total de muestras:"<<endl;     
 	while(fscanf(fp,"%d %d %s %f %f %d %d %d %d", &iden_city,&ident_prov,&nombre,&tempe,&hum,&hora,&minutos,&dia,&mes) != EOF){
-		if(ident_prov==1){
+		if(ident_prov==1 || ident_prov==2 || ident_prov==3){
 			struct city *new_node = NULL;
 			new_node = (struct city *) malloc(sizeof(city));
 			new_node = (struct city *) new_node;
@@ -151,8 +158,9 @@ void totalMuestras(struct city **stackptr, struct city){
 	fclose(fp);
 	temp = *stackptr;
 	while(temp!=NULL){
-		cout<<temp->cityId<<"\t"<<"1"<<"\t"<<temp->city_name<<"\t"<<temp->m.temp<<"\t"<<temp->m.hum<<"\t"
+		cout<<temp->cityId<<"\t"<<ident_prov<<"\t"<<"\t"<<temp->m.temp<<"\t"<<temp->m.hum<<"\t"
 			<<temp->m.time.hh<<"\t"<<temp->m.time.mm<<"\t"<<temp->m.time.day<<"\t"<<temp->m.time.month<<endl;
 		temp = temp->next;
 	}
 }
+
