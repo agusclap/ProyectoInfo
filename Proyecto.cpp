@@ -158,7 +158,7 @@ void totalMuestras(struct city **stackptr, struct city){
 	fclose(fp);
 	temp = *stackptr;
 	while(temp!=NULL){
-		cout<<temp->cityId<<"\t"<<ident_prov<<"\t"<<"\t"<<temp->m.temp<<"\t"<<temp->m.hum<<"\t"
+		cout<<temp->cityId<<"\t"<<ident_prov<<"\t"<<temp->city_name<<"\t"<<temp->m.temp<<"\t"<<temp->m.hum<<"\t"
 			<<temp->m.time.hh<<"\t"<<temp->m.time.mm<<"\t"<<temp->m.time.day<<"\t"<<temp->m.time.month<<endl;
 		temp = temp->next;
 	}
