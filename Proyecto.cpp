@@ -18,7 +18,6 @@ contener todos los datos del archivo .txt [esto por las dudas se lo preguntaria 
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include <conio.h>
 using namespace std;
 
 struct timestamp {
@@ -114,16 +113,16 @@ int main (void){
 void totalMuestras(struct city **stackptr, struct city){
 	FILE *fp;
 	struct city *temp = NULL;
-    struct city *new_node = NULL;
+    	struct city *new_node = NULL;
 	int hora,minutos,dia,mes = 0;
-    int iden_city,ident_prov = 0;
+    	int iden_city,ident_prov = 0;
 	char nombre[50];
 	float tempe,hum = 0;
 	fp = fopen("data_set.txt","r");
-    if(fp==NULL){
+    	if(fp==NULL){
         cout<<"No se pudo abrir el archivo"<<endl;
         exit(1);
-    }
+    	}
 	cout<<"Total de muestras:"<<endl;     
 	while(fscanf(fp,"%d %d %s %f %f %d %d %d %d", &iden_city,&ident_prov,&nombre,&tempe,&hum,&hora,&minutos,&dia,&mes) != EOF){
 		if(ident_prov==1 || ident_prov==2 || ident_prov==3){
@@ -134,8 +133,10 @@ void totalMuestras(struct city **stackptr, struct city){
 				cout<<"No hay memoria disponible"<<endl;
 				exit(0);
 			}
-			new_node->cityId = iden_city;
-            new_node->city_name[50] = nombre[50];
+	    new_node->cityId = iden_city;
+            for(int i=0;i<50;i++){
+	    	new_node->city_name[i] = nombre[i];
+	    }
             new_node->m.temp = tempe;
             new_node->m.hum = hum;
             new_node->m.time.day = dia;
