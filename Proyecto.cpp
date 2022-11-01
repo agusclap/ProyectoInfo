@@ -37,6 +37,7 @@ struct city {
     struct city *next;
     struct measurement m;
     int cityId;
+    int countryId; // agregue esto porque sino iden_prov va a contener el ultimo valor antes de salir del ciclod el while
     char city_name[50];
 };
 
@@ -113,9 +114,8 @@ int main (void){
 void totalMuestras(struct city **stackptr, struct city){
 	FILE *fp;
 	struct city *temp = NULL;
-    	struct city *new_node = NULL;
 	int hora,minutos,dia,mes = 0;
-    	int iden_city,ident_prov = 0;
+    int iden_city,ident_prov = 0;
 	char nombre[50];
 	float tempe,hum = 0;
 	fp = fopen("data_set.txt","r");
@@ -133,10 +133,11 @@ void totalMuestras(struct city **stackptr, struct city){
 				cout<<"No hay memoria disponible"<<endl;
 				exit(0);
 			}
-	    new_node->cityId = iden_city;
+	        new_node->cityId = iden_city;
+            new_node->countryId = ident_prov;
             for(int i=0;i<50;i++){
 	    	new_node->city_name[i] = nombre[i];
-	    }
+	        }
             new_node->m.temp = tempe;
             new_node->m.hum = hum;
             new_node->m.time.day = dia;
@@ -145,21 +146,16 @@ void totalMuestras(struct city **stackptr, struct city){
             new_node->m.time.mm = minutos;
             new_node->next = *stackptr;
             (*stackptr) = new_node;
-        }
-		//}else if(ident_prov==2){
-			
-		//}else if(ident_prov==3){
-			
-		//}else{
-		//	cout<<"Muestra descartada"<<endl;
-		//}
+        }else{
+			cout<<"Muestra descartada"<<endl;
+		}
 		//cout<<iden<<"\t"<<ident_prov<<"\t"<<nombre<<"\t"<<temp<<"\t"<<hum<<"\t"<<hora<<"\t"<<minutos<<"\t"<<dia<<"\t"<<mes<<endl;
 	}
     cout<<"Estructura cargada"<<endl;
 	fclose(fp);
 	temp = *stackptr;
 	while(temp!=NULL){
-		cout<<temp->cityId<<"\t"<<ident_prov<<"\t"<<temp->city_name<<"\t"<<temp->m.temp<<"\t"<<temp->m.hum<<"\t"
+		cout<<temp->cityId<<"\t"<<temp->countryId<<"\t"<<temp->city_name<<"\t"<<temp->m.temp<<"\t"<<temp->m.hum<<"\t"
 			<<temp->m.time.hh<<"\t"<<temp->m.time.mm<<"\t"<<temp->m.time.day<<"\t"<<temp->m.time.month<<endl;
 		temp = temp->next;
 	}
