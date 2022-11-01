@@ -18,6 +18,7 @@ contener todos los datos del archivo .txt [esto por las dudas se lo preguntaria 
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include "Lectura.h"
 using namespace std;
 
 struct timestamp {
@@ -42,6 +43,8 @@ struct city {
 };
 
 void totalMuestras(struct city **stackptr, struct city);
+void TemperaturaProm();
+void ciudadCalida();
 
 int main (void){
 
@@ -68,12 +71,12 @@ int main (void){
             }
             case 'b':
             {
-
+                TemperaturaProm();
                 break;
             }
             case 'c':
             {
-
+                ciudadCalida();
                 break;
             }
             case 'd':
@@ -161,3 +164,11 @@ void totalMuestras(struct city **stackptr, struct city){
 	}
 }
 
+void TemperaturaProm(){
+    Lectura l;
+    l.promedioTemp();
+}
+
+void ciudadCalida(){
+    
+}
