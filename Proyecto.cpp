@@ -21,6 +21,10 @@ contener todos los datos del archivo .txt [esto por las dudas se lo preguntaria 
 #include "Lectura.h"
 using namespace std;
 
+
+
+
+
 struct timestamp {
     int day;
     int month;
@@ -44,15 +48,14 @@ struct city {
 
 void totalMuestras(struct city **stackptr, struct city);
 void TemperaturaProm();
-void ciudadCalida();
+void ciudadCalida(Lectura l);
 
 int main (void){
 
     char opcion,seguir = ' ';
-	struct timestamp t;
-	struct measurement m;
 	struct city c;
     struct city *stackptr = NULL;
+    Lectura l;
     do{
         cout<<"MENU DE OPCIONES:"<<endl;
         cout<<"a) Total de las muestras almacenadas en las listas pertenecientes a cada provincia"<<endl;
@@ -76,7 +79,10 @@ int main (void){
             }
             case 'c':
             {
-                ciudadCalida();
+                
+                ciudadCalida(l);
+                
+            
                 break;
             }
             case 'd':
@@ -168,7 +174,31 @@ void TemperaturaProm(){
     Lectura l;
     l.promedioTemp();
 }
+void ciudadCalida(Lectura l){
+    int opcion=0;
+    char continuar= ' ';
 
-void ciudadCalida(){
-    
+	do{
+        cout<<"MENU DE OPCIONES"<<endl;
+        cout<<"1. Ciudad mas calida de la provincia de Cordoba"<<endl;
+        cout<<"2. Ciudad mas calida de la provincia de Santa Fe"<<endl;
+        cout<<"3. Ciudad mas calida de la provincia de Mendoza"<<endl;
+        cin>>opcion;
+        
+        switch (opcion)
+        {
+        case 1:
+            l.leerArchivo(opcion);
+            break;
+        
+        default:
+            break;
+        }  
+        cout<<"Desea continuar(s/n)?"<<endl;
+        cin>>continuar;  
+    }while(continuar == 's' || continuar=='S');
 }
+
+   
+    
+
