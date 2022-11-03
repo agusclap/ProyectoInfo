@@ -188,9 +188,17 @@ void ciudadCalida(Lectura l){
         switch (opcion)
         {
         case 1:
+        {
             l.leerArchivo(opcion);
-            break;
-        
+            break;}
+        case 2:
+        {
+            l.leerArchivo(opcion);
+        }
+        case 3:
+        {
+            l.leerArchivo(opcion);
+        }
         default:
             break;
         }  
