@@ -16,12 +16,14 @@ contener todos los datos del archivo .txt [esto por las dudas se lo preguntaria 
 
 #include <iostream>
 #include <string.h>
-#include <stdlib.h>
-#include <stdio.h>
 #include "Lectura.h"
 using namespace std;
 
-
+struct help{
+    float sumador;
+    char nombre[50];
+    struct help *next;
+};
 
 
 
@@ -48,7 +50,7 @@ struct city {
 
 void totalMuestras(struct city **stackptr, struct city);
 void TemperaturaProm();
-void ciudadCalida(Lectura l);
+void ciudadCalida(Lectura l,struct city *stackptr);
 
 int main (void){
 
@@ -80,7 +82,7 @@ int main (void){
             case 'c':
             {
                 
-                ciudadCalida(l);
+                ciudadCalida(l, stackptr);
                 
             
                 break;
@@ -174,10 +176,21 @@ void TemperaturaProm(){
     Lectura l;
     l.promedioTemp();
 }
-void ciudadCalida(Lectura l){
+void ciudadCalida(Lectura l,struct city *stackptr){
     int opcion=0;
+    struct help *new_node = NULL;
+    struct help *main = NULL;
+    struct city *temp=NULL;
     char continuar= ' ';
-
+    float maxtemp = 0;
+    float tempe = 0;
+    float array[24] = {0};
+    char nombre[50];
+    float sumador,promedio= 0;    
+    int contador,cont = 0;
+    int i = 0;
+    string provincia = " ";
+    
 	do{
         cout<<"MENU DE OPCIONES"<<endl;
         cout<<"1. Ciudad mas calida de la provincia de Cordoba"<<endl;
@@ -189,18 +202,62 @@ void ciudadCalida(Lectura l){
         {
         case 1:
         {
-            l.leerArchivo(opcion);
-            break;}
-        case 2:
-        {
-            l.leerArchivo(opcion);
-        }
-        case 3:
-        {
-            l.leerArchivo(opcion);
-        }
-        default:
+            temp = stackptr;
+            provincia = "Cordoba";
+            while(temp!=NULL){
+                if(temp->countryId==1){
+                    contador++;
+                    tempe = temp->m.temp;
+                    sumador = sumador + tempe;
+                    if(contador==80){
+                    new_node = (struct help *) malloc(sizeof(help));
+                    new_node = (struct help *) new_node;
+                    new_node->sumador = sumador;
+                    for(int i=0;i<50;i++){
+                        new_node->nombre[i] = temp->city_name[i];
+                    }
+                    new_node->next = main;
+                    main = new_node;
+                    contador = 0;
+                    sumador = 0;
+                    }
+                }
+                temp = temp->next;
+            }
+            new_node = main;
+            maxtemp = new_node->sumador;
+            while(new_node!=NULL){
+                if(maxtemp<new_node->sumador){
+                    maxtemp = new_node->sumador;
+                }
+                new_node = new_node->next;
+            }
+            new_node = main;
+            while(new_node!=NULL){
+                if(new_node->sumador==maxtemp){
+                    cout<<"La ciudad mas calida es "<<new_node->nombre<<endl;
+                }
+                new_node = new_node->next;
+            }
+            /*float max = 0;
+            temp = stackptr;
+            cout<<"Hola";
+            while(temp!=NULL){
+                if(temp->countryId==1)
+                {
+                    max = temp->m.temp;
+                    if(maxtemp==max)
+                    cout<<"La temperatura maxima es "<<temp->m.temp<<" de la ciudad "<<temp->city_name<<" de la provincia de Cordoba"<<endl;
+                }
+                temp = temp->next;
+            }*/
+        } 
             break;
+        
+        default:
+            {
+                break;
+            }
         }  
         cout<<"Desea continuar(s/n)?"<<endl;
         cin>>continuar;  
