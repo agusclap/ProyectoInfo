@@ -235,22 +235,10 @@ void ciudadCalida(Lectura l,struct city *stackptr){
             new_node = main;
             while(new_node!=NULL){
                 if(new_node->sumador==maxtemp){
-                    cout<<"La ciudad mas calida es "<<new_node->nombre<<endl;
+                    cout<<"La ciudad mas calida es "<<new_node->nombre<<endl; // ESTO ANDAAA
                 }
                 new_node = new_node->next;
             }
-            /*float max = 0;
-            temp = stackptr;
-            cout<<"Hola";
-            while(temp!=NULL){
-                if(temp->countryId==1)
-                {
-                    max = temp->m.temp;
-                    if(maxtemp==max)
-                    cout<<"La temperatura maxima es "<<temp->m.temp<<" de la ciudad "<<temp->city_name<<" de la provincia de Cordoba"<<endl;
-                }
-                temp = temp->next;
-            }*/
         } 
             break;
         
