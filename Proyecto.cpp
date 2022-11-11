@@ -51,7 +51,7 @@ struct city {
 void totalMuestras(struct city **stackptr, struct city);
 void TemperaturaProm();
 void ciudadCalida(Lectura l,struct city *stackptr);
-
+void ciudadesCalidas(struct city *stackptr, int);
 int main (void){
 
     char opcion,seguir = ' ';
@@ -202,54 +202,87 @@ void ciudadCalida(Lectura l,struct city *stackptr){
         {
         case 1:
         {
-            temp = stackptr;
-            provincia = "Cordoba";
-            while(temp!=NULL){
-                if(temp->countryId==1){
-                    contador++;
-                    tempe = temp->m.temp;
-                    sumador = sumador + tempe;
-                    if(contador==80){
-                    new_node = (struct help *) malloc(sizeof(help));
-                    new_node = (struct help *) new_node;
-                    new_node->sumador = sumador;
-                    for(int i=0;i<50;i++){
-                        new_node->nombre[i] = temp->city_name[i];
-                    }
-                    new_node->next = main;
-                    main = new_node;
-                    contador = 0;
-                    sumador = 0;
-                    }
-                }
-                temp = temp->next;
-            }
-            new_node = main;
-            maxtemp = new_node->sumador;
-            while(new_node!=NULL){
-                if(maxtemp<new_node->sumador){
-                    maxtemp = new_node->sumador;
-                }
-                new_node = new_node->next;
-            }
-            new_node = main;
-            while(new_node!=NULL){
-                if(new_node->sumador==maxtemp){
-                    cout<<"La ciudad mas calida es "<<new_node->nombre<<endl; // ESTO ANDAAA
-                }
-                new_node = new_node->next;
-            }
-        } 
+            ciudadesCalidas(stackptr,opcion);
             break;
+        }
+        case 2:
+        {
+            ciudadesCalidas(stackptr,opcion);
+            break;
+        }
+        case 3:
+        {
+            ciudadesCalidas(stackptr,opcion);
+            break;
+        }
         
         default:
             {
-                break;
+                cout<<"Ingrese una opcion correcta"<<endl;
             }
         }  
         cout<<"Desea continuar(s/n)?"<<endl;
         cin>>continuar;  
     }while(continuar == 's' || continuar=='S');
+}
+
+void ciudadesCalidas(struct city *stackptr, int opcion){
+    struct help *new_node = NULL;
+    struct help *main = NULL;
+    struct city *temp=NULL;
+    float maxtemp = 0;
+    float tempe = 0;
+    float array[24] = {0};
+    char nombre[50];
+    float sumador,promedio= 0;    
+    int contador,cont = 0;
+    int i = 0;
+    string provincia = " ";
+    temp = stackptr;
+    if(opcion==1){
+        provincia = "Cordoba";
+    }
+    if(opcion==2){
+        provincia = "Santa Fe";
+    }
+    if(opcion==3){
+        provincia = "Mendoza";
+    }
+    while(temp!=NULL){
+        if(temp->countryId==opcion){
+            contador++;
+            tempe = temp->m.temp;
+            sumador = sumador + tempe;
+            if(contador==80){
+                new_node = (struct help *) malloc(sizeof(help));
+                new_node = (struct help *) new_node;
+                new_node->sumador = sumador;
+                for(int i=0;i<50;i++){
+                    new_node->nombre[i] = temp->city_name[i];
+                }
+                new_node->next = main;
+                main = new_node;
+                contador = 0;
+                sumador = 0;
+            }
+        }
+        temp = temp->next;
+    }
+    new_node = main;
+    maxtemp = new_node->sumador;
+    while(new_node!=NULL){
+        if(maxtemp<new_node->sumador){
+            maxtemp = new_node->sumador;
+        }
+        new_node = new_node->next;
+    }
+    new_node = main;
+    while(new_node!=NULL){
+        if(new_node->sumador==maxtemp){
+            cout<<"La ciudad mas calida de la provincia de "<<provincia<<" es "<<new_node->nombre<<endl; // ESTO ANDAAA
+        }
+        new_node = new_node->next;
+    }
 }
 
    
