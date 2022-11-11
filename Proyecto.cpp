@@ -50,8 +50,11 @@ struct city {
 
 void totalMuestras(struct city **stackptr, struct city);
 void TemperaturaProm();
-void ciudadCalida(Lectura l,struct city *stackptr);
+void ciudadCalida(struct city *stackptr);
 void ciudadesCalidas(struct city *stackptr, int);
+void ciudadFria(struct city *stackptr);
+void ciudadesFrias(struct city *stackptr,int);
+
 int main (void){
 
     char opcion,seguir = ' ';
@@ -82,14 +85,14 @@ int main (void){
             case 'c':
             {
                 
-                ciudadCalida(l, stackptr);
+                ciudadCalida(stackptr);
                 
             
                 break;
             }
             case 'd':
             {
-
+                ciudadFria(stackptr);
                 break;
             }
             case 'e':
@@ -176,20 +179,9 @@ void TemperaturaProm(){
     Lectura l;
     l.promedioTemp();
 }
-void ciudadCalida(Lectura l,struct city *stackptr){
+void ciudadCalida(struct city *stackptr){
     int opcion=0;
-    struct help *new_node = NULL;
-    struct help *main = NULL;
-    struct city *temp=NULL;
     char continuar= ' ';
-    float maxtemp = 0;
-    float tempe = 0;
-    float array[24] = {0};
-    char nombre[50];
-    float sumador,promedio= 0;    
-    int contador,cont = 0;
-    int i = 0;
-    string provincia = " ";
     
 	do{
         cout<<"MENU DE OPCIONES"<<endl;
@@ -221,9 +213,9 @@ void ciudadCalida(Lectura l,struct city *stackptr){
                 cout<<"Ingrese una opcion correcta"<<endl;
             }
         }  
-        cout<<"Desea continuar(s/n)?"<<endl;
+        cout<<"Desea continuar(y/n)?"<<endl;
         cin>>continuar;  
-    }while(continuar == 's' || continuar=='S');
+    }while(continuar == 'y' || continuar=='Y');
 }
 
 void ciudadesCalidas(struct city *stackptr, int opcion){
@@ -232,11 +224,8 @@ void ciudadesCalidas(struct city *stackptr, int opcion){
     struct city *temp=NULL;
     float maxtemp = 0;
     float tempe = 0;
-    float array[24] = {0};
-    char nombre[50];
-    float sumador,promedio= 0;    
-    int contador,cont = 0;
-    int i = 0;
+    float sumador = 0;    
+    int contador = 0;
     string provincia = " ";
     temp = stackptr;
     if(opcion==1){
@@ -285,6 +274,98 @@ void ciudadesCalidas(struct city *stackptr, int opcion){
     }
 }
 
-   
+void ciudadFria(struct city *stackptr){
+    int opcion=0;
+    char continuar= ' ';
     
+    do{
+        cout<<"MENU DE OPCIONES"<<endl;
+        cout<<"1. Ciudad mas calida de la provincia de Cordoba"<<endl;
+        cout<<"2. Ciudad mas calida de la provincia de Santa Fe"<<endl;
+        cout<<"3. Ciudad mas calida de la provincia de Mendoza"<<endl;
+        cin>>opcion;
+        
+        switch (opcion)
+        {
+        case 1:
+        {
+            ciudadesFrias(stackptr,opcion);
+            break;
+        }
+        case 2:
+        {
+            ciudadesFrias(stackptr,opcion);
+            break;
+        }
+        case 3:
+        {
+            ciudadesFrias(stackptr,opcion);
+            break;
+        }
+        
+        default:
+            {
+                cout<<"Ingrese una opcion correcta"<<endl;
+            }
+        }  
+        cout<<"Desea continuar(y/n)?"<<endl;
+        cin>>continuar;  
+    }while(continuar == 'y' || continuar=='Y');    
+}
+
+void ciudadesFrias(struct city *stackptr,int opcion){
+    struct help *new_node = NULL;
+    struct help *main = NULL;
+    struct city *temp=NULL;
+    float mintemp = 0;
+    float tempe = 0;
+    float sumador = 0;    
+    int contador = 0;
+    string provincia = " ";
+    temp = stackptr;
+    if(opcion==1){
+        provincia = "Cordoba";
+    }
+    if(opcion==2){
+        provincia = "Santa Fe";
+    }
+    if(opcion==3){
+        provincia = "Mendoza";
+    }
+    while(temp!=NULL){
+        if(temp->countryId==opcion){
+            contador++;
+            tempe = temp->m.temp;
+            sumador = sumador + tempe;
+            if(contador==80){
+                new_node = (struct help *) malloc(sizeof(help));
+                new_node = (struct help *) new_node;
+                new_node->sumador = sumador;
+                for(int i=0;i<50;i++){
+                    new_node->nombre[i] = temp->city_name[i];
+                }
+                new_node->next = main;
+                main = new_node;
+                contador = 0;
+                sumador = 0;
+            }
+        }
+        temp = temp->next;
+    }
+    new_node = main;
+    mintemp = new_node->sumador;
+    while(new_node!=NULL){
+        if(mintemp>new_node->sumador){
+            mintemp = new_node->sumador;
+        }
+        new_node = new_node->next;
+    }
+    new_node = main;
+    while(new_node!=NULL){
+        if(new_node->sumador==mintemp){
+            cout<<"La ciudad mas fria de la provincia de "<<provincia<<" es "<<new_node->nombre<<endl; // ESTO ANDAAA
+        }
+        new_node = new_node->next;
+    }
+}
 
