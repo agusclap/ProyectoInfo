@@ -1,3 +1,0 @@
-Holaa, tcompenes q ir arando medicion por medicion de cada dia con un if(temp->m.temp>max) 
-q este dentro de otro if q te diga si sigue siendo el mismo cityId para saber si cambiaste de ciudad, 
-si cambaiste, se supone q en max te quedaria la temperatura mas calida
