@@ -59,9 +59,9 @@ void Lectura::promedioTemp(int bandera){
     promedio1 = sumador1 / cont1;
     promedio2 = sumador2 / cont2;
     if(bandera==1){
-        cout<<"Temperatura promedio de Cordoba es "<<promedio<<endl;
-        cout<<"Temperatura promedio de Santa Fe es "<<promedio1<<endl;
-        cout<<"Temperatura promedio de Mendoza es "<<promedio2<<endl;
+        cout<<"Temperatura promedio de Cordoba es "<<promedio<<" grados centigrados"<<endl;
+        cout<<"Temperatura promedio de Santa Fe es "<<promedio1<<" grados centigrados"<<endl;
+        cout<<"Temperatura promedio de Mendoza es "<<promedio2<<" grados centigrados"<<endl;
     }else{
     array[0] = promedio;
     array[1] = promedio1;
@@ -80,7 +80,7 @@ void Lectura::promedioTemp(int bandera){
     if(array[0]==promedio2){
         provincia = "Mendoza";
     }
-    cout<<"La mejor provincia para cultivar pimientos es "<<provincia<<endl;
+    cout<<"La mejor provincia para cultivar pimientos es "<<provincia<<" con temperatura promedio de "<<array[0]<<endl;
     }
 }
 

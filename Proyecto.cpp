@@ -1,12 +1,13 @@
 #include <iostream>
 #include <string.h>
 #include "Lectura.h"
+#include <iomanip>
 using namespace std;
 
 struct help{
     float sumador;
     char nombre[50];
-    int temp;
+    float promedio;
     struct help *next;
 };
 
@@ -41,6 +42,7 @@ void ciudadesFrias(struct city *stackptr,int);
 void diaFrio(struct city *stackptr);
 void diaCalido(struct city *stackptr);
 void diasCalidos(struct city *stackptr);
+void promedioTemp(struct city *stackptr);
 
 int main (void){
     int bandera = 0;
@@ -73,7 +75,7 @@ int main (void){
             }
             case 'c':
             {
-
+                promedioTemp(stackptr);
                 break;
             }
             case 'd':
@@ -391,7 +393,7 @@ void diaFrio(struct city *stackptr){
         }
         temp = temp->next;
     }
-    cout<<"La fecha mas fria de Cordoba es "<<diamin<<" con una temperatura de "<<tempe<<endl;
+    cout<<"La fecha mas fria de Cordoba es "<<diamin<<" con una temperatura de "<<tempe<<" grados centigrados"<<endl;
     tempe = 0;
     diamin = 0;
     i=0;
@@ -409,7 +411,7 @@ void diaFrio(struct city *stackptr){
         }
         temp = temp->next;
     }
-    cout<<"La fecha mas fria de Santa Fe es "<<diamin<<" con una temperatura de "<<tempe<<endl;
+    cout<<"La fecha mas fria de Santa Fe es "<<diamin<<" con una temperatura de "<<tempe<<" grados centigrados"<<endl;
     tempe = 0;
     diamin = 0;
     i=0;
@@ -427,7 +429,7 @@ void diaFrio(struct city *stackptr){
         }
         temp = temp->next;
     }
-    cout<<"La fecha mas fria de Mendoza es "<<diamin<<" con una temperatura de "<<tempe<<endl;
+    cout<<"La fecha mas fria de Mendoza es "<<diamin<<" con una temperatura de "<<tempe<<" grados centigrados"<<endl;
 }
 
 void diaCalido(struct city *stackptr){
@@ -450,12 +452,48 @@ void diaCalido(struct city *stackptr){
             dia_max = dia;
         }
         if(contador==80){
-            cout<<"El dia mas calido de la ciudad de "<<temp->city_name<<" es "<<dia_max<<" con el valor de "<<temp_max<<endl;
+            cout<<"El dia mas calido de la ciudad de "<<temp->city_name<<" es "<<dia_max<<" con el valor de "<<temp_max<<" grados centigrados"<<endl;
             contador = 0;
             if(temp->next!=NULL){
                 temp_max = temp->next->m.temp;}
         }
         temp = temp->next;
     }  
+}
+
+void promedioTemp(struct city *stackptr){
+    struct city *temp=NULL;
+    struct help *main=NULL;
+    struct help *new_node=NULL;
+
+
+    temp = stackptr;
+
+    int contador = 0;
+    float tempe = 0;
+    float sumador = 0;
+    float promedio = 0;
+    while(temp!=NULL){
+        contador++;
+        tempe = temp->m.temp;
+        sumador = sumador + tempe;
+        if(contador==80){
+            new_node = (struct help *) malloc(sizeof(help));
+            new_node = (struct help *) new_node;
+            new_node->sumador = sumador;
+            promedio = sumador/contador;
+            new_node->promedio = promedio;
+            for(int i=0;i<50;i++){
+                new_node->nombre[i] = temp->city_name[i];
+            }
+            cout<<"El promedio de la temperatura de la ciudad "<<new_node->nombre;
+            cout<<" es "<<fixed<<setprecision(2)<<new_node->promedio<<" grados centigrados"<<endl;
+            new_node->next = main;
+            main = new_node;
+            contador = 0;
+            sumador = 0;
+        }
+        temp = temp->next;
+    }
 }
 
