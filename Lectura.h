@@ -1,5 +1,4 @@
 #include <iostream>
-#include <string>
 using namespace std;
 
 class Lectura{
@@ -41,15 +40,15 @@ void Lectura::promedioTemp(int bandera){
     fp = fopen("data_set.txt","r");
     while(fscanf(fp,"%d %d %s %f %f %d %d %d %d\n"
     ,&iden_city,&ident_prov,&nombre,&tempe,&hum,&hora,&minutos,&dia,&mes)!=EOF){
-        if(ident_prov==1){ //Cordoba
+        if(ident_prov==1){ 
             temp = tempe;
             sumador = sumador + temp;
             cont++;
-        }else if(ident_prov==2){ // Santa Fe
+        }else if(ident_prov==2){ 
             temp1 = tempe;
             sumador1 = sumador1 + temp1;
             cont1++;
-        }else if(ident_prov==3){ // Mendoza
+        }else if(ident_prov==3){ 
             temp2 = tempe;
             sumador2 = sumador2 + temp2;
             cont2++;

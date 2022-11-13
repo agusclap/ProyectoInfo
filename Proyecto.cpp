@@ -41,8 +41,7 @@ void ciudadFria(struct city *stackptr,struct city *head,struct city *front);
 void ciudadesFrias(struct city *stackptr,int,struct city *head,struct city *front);
 void diaFrio(struct city *stackptr,struct city *head,struct city *front);
 void diaCalido(struct city *stackptr,struct city *head,struct city *front);
-void diasCalidos(struct city *stackptr);
-void promedioTemp(struct city *stackptr);
+void promedioTemp(struct city *stackptr,struct city *head,struct city *front);
 
 int main (void){
     int bandera = 0;
@@ -79,7 +78,7 @@ int main (void){
             }
             case 'c':
             {
-                promedioTemp(stackptr);
+                promedioTemp(stackptr,head,front);
                 break;
             }
             case 'd':
@@ -720,7 +719,7 @@ void diaCalido(struct city *stackptr,struct city *head,struct city *front){
     }
 }
 
-void promedioTemp(struct city *stackptr){
+void promedioTemp(struct city *stackptr,struct city *head,struct city *front){
     struct city *temp=NULL;
     struct help *main=NULL;
     struct help *new_node=NULL;
@@ -729,11 +728,68 @@ void promedioTemp(struct city *stackptr){
     float sumador = 0;
     float promedio = 0;
     temp = stackptr;
+    cout<<"Ciudades de Cordoba: "<<endl;
     while(temp!=NULL){
         contador++;
         tempe = temp->m.temp;
         sumador = sumador + tempe;
         if(contador==80){
+            new_node = (struct help *) malloc(sizeof(help));
+            new_node = (struct help *) new_node;
+            new_node->sumador = sumador;
+            promedio = sumador/contador;
+            new_node->promedio = promedio;
+            for(int i=0;i<50;i++){
+                new_node->nombre[i] = temp->city_name[i];
+            }
+            cout<<"El promedio de la temperatura de la ciudad "<<new_node->nombre;
+            cout<<" es "<<fixed<<setprecision(2)<<new_node->promedio<<
+            " grados centigrados"<<endl;
+            new_node->next = main;
+            main = new_node;
+            contador = 0;
+            sumador = 0;
+        }
+        temp = temp->next;
+    }
+    contador = 0;
+    sumador = 0;
+    temp = head;
+    cout<<"Ciudades de Santa Fe: "<<endl;
+    while(temp!=NULL){
+        contador++;
+        tempe = temp->m.temp;
+        sumador = sumador + tempe;
+        if(contador==80){
+            new_node = NULL;
+            new_node = (struct help *) malloc(sizeof(help));
+            new_node = (struct help *) new_node;
+            new_node->sumador = sumador;
+            promedio = sumador/contador;
+            new_node->promedio = promedio;
+            for(int i=0;i<50;i++){
+                new_node->nombre[i] = temp->city_name[i];
+            }
+            cout<<"El promedio de la temperatura de la ciudad "<<new_node->nombre;
+            cout<<" es "<<fixed<<setprecision(2)<<new_node->promedio<<
+            " grados centigrados"<<endl;
+            new_node->next = main;
+            main = new_node;
+            contador = 0;
+            sumador = 0;
+        }
+        temp = temp->next;
+    }
+    contador = 0;
+    sumador = 0;
+    temp = front;
+    cout<<"Ciudades de Mendoza: "<<endl;
+    while(temp!=NULL){
+        contador++;
+        tempe = temp->m.temp;
+        sumador = sumador + tempe;
+        if(contador==80){
+            new_node = NULL;
             new_node = (struct help *) malloc(sizeof(help));
             new_node = (struct help *) new_node;
             new_node->sumador = sumador;
