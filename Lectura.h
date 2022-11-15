@@ -38,8 +38,7 @@ void Lectura::promedioTemp(int bandera){
     double promedio2 = 0;
     float temp,temp1,temp2 = 0;
     fp = fopen("data_set.txt","r");
-    while(fscanf(fp,"%d %d %s %f %f %d %d %d %d\n"
-    ,&iden_city,&ident_prov,&nombre,&tempe,&hum,&hora,&minutos,&dia,&mes)!=EOF){
+    while(fscanf(fp,"%d %d %s %f %f %d %d %d %d\n",&iden_city,&ident_prov,&nombre,&tempe,&hum,&hora,&minutos,&dia,&mes)!=EOF){
         if(ident_prov==1){ 
             temp = tempe;
             sumador = sumador + temp;
@@ -82,6 +81,7 @@ void Lectura::promedioTemp(int bandera){
     }
     cout<<"La mejor provincia para cultivar pimientos es "<<provincia<<" con temperatura promedio de "<<array[0]<<" grados centigrados"<<endl;
     }
+    
 }
 
 
