@@ -743,8 +743,7 @@ void promedioTemp(struct city *stackptr,struct city *head,struct city *front){
                 new_node->nombre[i] = temp->city_name[i];
             }
             cout<<"El promedio de la temperatura de la ciudad "<<new_node->nombre;
-            cout<<" es "<<fixed<<setprecision(2)<<new_node->promedio<<
-            " grados centigrados"<<endl;
+            cout<<" es "<<fixed<<setprecision(2)<<new_node->promedio<<" grados centigrados"<<endl;
             new_node->next = main;
             main = new_node;
             contador = 0;
@@ -771,8 +770,7 @@ void promedioTemp(struct city *stackptr,struct city *head,struct city *front){
                 new_node->nombre[i] = temp->city_name[i];
             }
             cout<<"El promedio de la temperatura de la ciudad "<<new_node->nombre;
-            cout<<" es "<<fixed<<setprecision(2)<<new_node->promedio<<
-            " grados centigrados"<<endl;
+            cout<<" es "<<fixed<<setprecision(2)<<new_node->promedio<<" grados centigrados"<<endl;
             new_node->next = main;
             main = new_node;
             contador = 0;
@@ -799,8 +797,7 @@ void promedioTemp(struct city *stackptr,struct city *head,struct city *front){
                 new_node->nombre[i] = temp->city_name[i];
             }
             cout<<"El promedio de la temperatura de la ciudad "<<new_node->nombre;
-            cout<<" es "<<fixed<<setprecision(2)<<new_node->promedio<<
-            " grados centigrados"<<endl;
+            cout<<" es "<<fixed<<setprecision(2)<<new_node->promedio<<" grados centigrados"<<endl;
             new_node->next = main;
             main = new_node;
             contador = 0;
