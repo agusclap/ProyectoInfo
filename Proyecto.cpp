@@ -2,7 +2,7 @@
 #include "Lectura.h"
 #include <iomanip>
 using namespace std;
-
+// PROYENCTO INFO 2
 struct help{
     float sumador;
     char nombre[50];
@@ -46,7 +46,6 @@ void promedioTemp(struct city *stackptr,struct city *head,struct city *front);
 int main (void){
     int bandera = 0;
     char opcion,seguir = ' ';
-	struct city c;
     struct city *stackptr = NULL;
     struct city *head = NULL;
     struct city *back = NULL;
@@ -663,9 +662,12 @@ void diaCalido(struct city *stackptr,struct city *head,struct city *front){
         if(contador==80){
             cout<<"El dia mas calido de la ciudad de "<<temp->city_name<<" es "<<dia_max<<" con el valor de "<<temp_max<<" grados centigrados"<<endl;
             contador = 0;
-            /*if(temp->next!=NULL){
+            if(temp->next!=NULL){
+
                 temp_max = temp->next->m.temp;
-            }*/
+
+            }
+
         }
         temp = temp->next;
     } 
