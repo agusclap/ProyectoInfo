@@ -644,8 +644,6 @@ void diaFrio(struct city *stackptr,struct city *head,struct city *front){
 
 void diaCalido(struct city *stackptr,struct city *head,struct city *front){
     struct city *temp=NULL;
-    struct help *main=NULL;
-    struct help *new_node=NULL;
     float tempe = 0;
     int dia = 0;
     int contador = 0;
@@ -665,9 +663,9 @@ void diaCalido(struct city *stackptr,struct city *head,struct city *front){
         if(contador==80){
             cout<<"El dia mas calido de la ciudad de "<<temp->city_name<<" es "<<dia_max<<" con el valor de "<<temp_max<<" grados centigrados"<<endl;
             contador = 0;
-            if(temp->next!=NULL){
+            /*if(temp->next!=NULL){
                 temp_max = temp->next->m.temp;
-            }
+            }*/
         }
         temp = temp->next;
     } 
